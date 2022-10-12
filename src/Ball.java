@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author pavel
- */
+
 public class Ball {
     
     private int ballX;
     private int ballY;
-    private int xChange = 10;
-    private int yChange = 10;
+    private int xChange = 10; // change x speed of ball
+    private int yChange = 10; // change y speed of ball
     private int xDir = 1;
     private int yDir = 1;
     
@@ -38,5 +30,13 @@ public class Ball {
         }
         ballY = ballY + yChange * yDir;
         return ballY;
+    }
+    
+    public void setXChange(int x) {
+        xChange = x;
+    }
+    
+    public void setYChange(int y) {
+        yChange = y;
     }
 }
