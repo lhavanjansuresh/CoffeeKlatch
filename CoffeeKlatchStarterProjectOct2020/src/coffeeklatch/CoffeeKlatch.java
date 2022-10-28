@@ -15,8 +15,8 @@ public class CoffeeKlatch {
     public static void main(String[] args) {
         // Declare a reference to a CoffeeMachine.
 
-        CoffeeMachine cm = new CoffeeMachine();;
-        CoffeeCup cc = new CoffeeCup();;
+        CoffeeMachine cm = new CoffeeMachine();
+        CoffeeCup cc = new CoffeeCup();
 
         // Create a new CoffeeMachine and make the variable refer to it.
         Scanner Keyboard = new Scanner(System.in);
@@ -30,20 +30,27 @@ public class CoffeeKlatch {
                 cm.resetFlags();
                 System.out.println("Reseting flags...");
             }
+       do{
         System.out.println("                                               MACHINE                 "
                 + "             USER: "+name+"    "
                 + "Cup Size: "+size+"\n                          Water      Level"
                 + "      Beans     BeansGround     CoffeeBrewed     Cup Full     Strength \n"
                 + "                          "+cm.isThereWater()+"       "+cm.waterLevel()+"         "
-                   +cm.addBeansBoolean()+"        "+cm.beansGround()+"                             "+cc.isFull()+"         "+strength+" \nOPTION: n - New Customer\n        w - Add Water\n"
+                   +cm.addBeansBoolean()+"        "+cm.beansGround()+"           "+cm.brewedBoolean()+"          "+cc.isFull()+"         "+strength+" \nOPTION: n - New Customer\n        w - Add Water\n"
                 + "        b - Add Coffee Beans\n        g - Grind Beans\n        "
                 + "r - Brew Coffee\n        p - Pour a cup\n        d - Drink a Cup\n"
-                + "        x - exit");
+                + "        x - Exit");
          
-        if (newCustomer == true){ 
+        
         System.out.print("                 Your Choice? ");
         option = Keyboard.nextLine();
+        if (option.equals("n")){
+            newCustomer = true;
         }
+        else if (!option.equals("n") && newCustomer == false) {
+            System.out.println("Please add new customer!");
+        }
+       } while (newCustomer == false);
         if (option.equals("n") || newCustomer == false) {
             cm.resetFlags();
             System.out.print("What is your name? ");
@@ -89,14 +96,17 @@ public class CoffeeKlatch {
             cm.grindBeans();
         }
         else if (option.equals("r")) {
-            cm.brew(cc);
+                cm.brew(cc);
         }
         else if (option.equals("p")) {
+            
+            if (cm.brewedBoolean() == true){
             cm.pourCup(cc);
             cc.fill();
-//            if (cm.status() == false){
-//                cm.resetFlags();
-//            }
+            }
+            else {
+                System.out.println("Please brew coffee.");
+            }
         }
         else if (option.equals("d")) {
             if (cc.drink() ==  true){

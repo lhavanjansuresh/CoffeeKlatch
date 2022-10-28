@@ -12,7 +12,7 @@ package coffeeklatch;
 public class CoffeeMachine {
  // The current strength of the coffee.
     private String strength, name, size;
-    boolean isThereWater = false, beansAdded = false, beansGrind = false;
+    boolean isThereWater = false, beansAdded = false, beansGrind = false, coffeeBrewed = false;
     private int waterLevel = 0;
     
    
@@ -59,25 +59,49 @@ public class CoffeeMachine {
      * @param c The cup of coffee to be filled
      */
     public void brew(CoffeeCup c) {
+        
+        if (isThereWater == true && beansAdded == true && beansGrind == true){
         System.out.println("Brewing the coffee.");
         System.out.println("==Brewed "+strength+" coffee for " +name);
+        coffeeBrewed = true;
         c.fill();
+    }
+        else if (isThereWater == false) {
+                 System.out.println("Please add water.");
+                }
+        if (beansAdded == false) {
+                 System.out.println("Please add beans.");
+                }
+        if (beansGrind == false) {
+                 System.out.println("Please grind beans.");
+                }
+       
         
     }
+    public boolean brewedBoolean() {
+        
+        if (isThereWater() == true && addBeansBoolean() == true && beansGround() == true && coffeeBrewed == true){
+         return true;   
+        }
+        else{
+            return false;
+        }
+    }
+    
+    
 //    public void waterLevel() {
 //        System.out.println(waterLevel);
 //}
     public void pourCup (CoffeeCup cc){
-        if (size == "small" && waterLevel >= 2 && cc.isFull()== false){
+        if (size == "small" && waterLevel >= 2 && cc.isFull()== false && coffeeBrewed == true){
             waterLevel = waterLevel - 2;
-            System.out.println(waterLevel);
             System.out.println("Pouring a cup of coffee.");
         }
-        else if (size.equals("medium") && waterLevel >= 3 && cc.isFull()== false){
+        else if (size.equals("medium") && waterLevel >= 3 && cc.isFull()== false && coffeeBrewed == true){
             waterLevel = waterLevel - 3;
             System.out.println("Pouring a cup of coffee.");
         }
-        else if (size.equals("large") && waterLevel >= 4 && cc.isFull()== false) {
+        else if (size.equals("large") && waterLevel >= 4 && cc.isFull()== false && coffeeBrewed == true) {
             waterLevel = waterLevel - 4;
             System.out.println("Pouring a cup of coffee.");
         }
@@ -87,9 +111,13 @@ public class CoffeeMachine {
         else{
             isThereWater = false;
             beansAdded = false;
+            coffeeBrewed = false;
         }
         if (waterLevel == 0){
             isThereWater = false;
+            isThereWater = false;
+            beansAdded = false;
+            coffeeBrewed = false;
         }
     }
     
